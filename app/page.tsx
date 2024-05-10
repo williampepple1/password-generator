@@ -2,6 +2,7 @@
 
 import type { NextPage } from 'next';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const Home: NextPage = () => {
   const [password, setPassword] = useState<string>('');
@@ -16,6 +17,11 @@ const Home: NextPage = () => {
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
     const numberChars = '0123456789';
     const symbolChars = '!@#$%^&*()_+-=[]{}|;:",.<>?';
+
+    if (!includeUppercase && !includeLowercase && !includeNumbers && !includeSymbols) {
+      toast.error("Please select at least one character type for the password.");
+      return;
+    }
 
     let validChars = '';
     if (includeUppercase) validChars += uppercaseChars;
